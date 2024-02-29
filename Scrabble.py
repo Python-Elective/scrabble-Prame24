@@ -72,7 +72,38 @@ def get_word_score(word, n):
     returns: int >= 0
     """
     # TO DO ... <-- Remove this comment when you code this function
+    # pre-condition
+    assert isinstance(word, str), "word must be a string"
+    assert len(word) > 0, "there must be a word"
+    word = word.lower()
+    assert word.islower(), "lower conversion fail"
+    assert isinstance(n, int)
+    assert n > 0, "hand length m must not be 0"
+    
+    #magic code
+    """The score for a word is the sum of the points for letters in the
+    word, multiplied by the length of the word, PLUS 50 points if all n
+    letters are used on the first turn."""
+    word_score = 1
+    """
+    for each letter in word
+        get letter score from dict SCRABBLE_LETTER_VALUES
+        add up all the letters score
+        
+    multiply by length of word
+    then bonus calculation
+    """
+    
+    #post-condition
+    assert word_score > 0, "score calc fail"
+    assert isinstance(word_score, int), "score must be int"
+    return word_score
 
+# test case
+# get_word_score(1233, 7)
+get_word_score("", 7)
+get_word_score("haPPY", 7)
+get_word_score("blabla", 0)
 
 #
 # Problem #2: Make sure you understand how this function works and what it does!
@@ -145,8 +176,7 @@ def update_hand(hand, word):
     hand: dictionary (string -> int)    
     returns: dictionary (string -> int)
     """
-    # TO DO ... <-- Remove this comment when you code this function
-
+    # todo
 
 #
 # Problem #3: Test word validity
