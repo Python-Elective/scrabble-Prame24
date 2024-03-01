@@ -84,7 +84,7 @@ def get_word_score(word, n):
     """The score for a word is the sum of the points for letters in the
     word, multiplied by the length of the word, PLUS 50 points if all n
     letters are used on the first turn."""
-    word_score = 1
+    word_score = 0
     """
     for each letter in word
         get letter score from dict SCRABBLE_LETTER_VALUES
@@ -93,6 +93,10 @@ def get_word_score(word, n):
     multiply by length of word
     then bonus calculation
     """
+    for letter in word:
+        word_score += (SCRABBLE_LETTER_VALUES[letter]) * len(word)
+        if len(word) == n:
+            word_score += 150
     
     #post-condition
     assert word_score > 0, "score calc fail"
@@ -101,9 +105,9 @@ def get_word_score(word, n):
 
 # test case
 # get_word_score(1233, 7)
-get_word_score("", 7)
+# get_word_score("", 7)
 get_word_score("haPPY", 7)
-get_word_score("blabla", 0)
+# get_word_score("blabla", 0)
 
 #
 # Problem #2: Make sure you understand how this function works and what it does!
@@ -155,6 +159,7 @@ def deal_hand(n):
 
     return hand
 
+
 #
 # Problem #2: Update a hand by removing letters
 #
@@ -177,6 +182,22 @@ def update_hand(hand, word):
     returns: dictionary (string -> int)
     """
     # todo
+    """
+    make a hand.copy()
+    for every letter in word
+        use the letter to look up the handcopy val
+        subtract one from handcopy val
+    return handcopy
+    """
+    handcopy = hand.copy()
+    for letter in word:
+        for n in handcopy:
+            if letter == n:
+                handcopy[n] -= 1
+    return handcopy
+                
+l = {'a': 1, 'q': 1, 'l': 2, 'm': 1, 'u': 1, 'i': 1}
+print(update_hand(l, 'quail'))
 
 #
 # Problem #3: Test word validity
