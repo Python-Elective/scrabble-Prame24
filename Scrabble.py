@@ -56,7 +56,7 @@ def get_frequency_dict(sequence):
 #
 # Problem #1: Scoring a word
 #
-def get_word_score(word, n):
+def get_word_score(word: str, n: int) -> int:
     """
     Returns the score for a word. Assumes the word is a valid word.
 
@@ -74,9 +74,9 @@ def get_word_score(word, n):
     # TO DO ... <-- Remove this comment when you code this function
     # pre-condition
     assert isinstance(word, str), "word must be a string"
-    assert len(word) > 0, "there must be a word"
-    word = word.lower()
-    assert word.islower(), "lower conversion fail"
+    if len(word) > 0:
+        word = word.lower()
+        assert word.islower(), "lower conversion fail"
     assert isinstance(n, int)
     assert n > 0, "hand length m must not be 0"
     
@@ -94,27 +94,29 @@ def get_word_score(word, n):
     then bonus calculation
     """
     for letter in word:
-        word_score += (SCRABBLE_LETTER_VALUES[letter]) * len(word)
-        if len(word) == n:
-            word_score += 150
+        word_score += SCRABBLE_LETTER_VALUES[letter]
+    word_score *= len(word)
+    if len(word) == n:
+        word_score += 50
     
     #post-condition
-    assert word_score > 0, "score calc fail"
+    assert word_score >= 0, "score calc fail"
     assert isinstance(word_score, int), "score must be int"
     return word_score
 
 # test case
 # get_word_score(1233, 7)
 # get_word_score("", 7)
-get_word_score("haPPY", 7)
+print(get_word_score("weed", 7))
+print(get_word_score("waybill", 7))
 # get_word_score("blabla", 0)
 
 #
 # Problem #2: Make sure you understand how this function works and what it does!
 #
-def display_hand(hand):
+def display_hand(hand: dict):
     """
-    Displays the letters currently in the hand.
+     Displays the letters currently in the hand.
 
     For example:
     >>> display_hand({'a':1, 'x':2, 'l':3, 'e':1})
@@ -230,7 +232,7 @@ def calculate_hand_len(hand):
     # TO DO... <-- Remove this comment when you code this function
 
 
-def play_hand(hand, word_list, n):
+def play_hand(hand:dict, word_list: list, n: int):
     """
     Allows the user to play the given hand, as follows:
 
