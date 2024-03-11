@@ -229,9 +229,7 @@ def is_valid_word(word, hand, word_list):
         
     for letter in word:
         count = word.count(letter)
-        if letter not in hand:
-            return False
-        elif word not in word_list:
+        if letter not in hand or word not in word_list:
             return False
         else:
             if hand[letter] - count < 0:
@@ -253,7 +251,11 @@ def calculate_hand_len(hand):
     returns: integer
     """
     # TO DO... <-- Remove this comment when you code this function
-
+    assert isinstance(hand, dict), "hand must be a dictionary"
+    count = 0
+    for letter in hand:
+        count += hand[letter]
+    return count
 
 def play_hand(hand:dict, word_list: list, n: int):
     """
