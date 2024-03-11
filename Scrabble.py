@@ -107,8 +107,8 @@ def get_word_score(word: str, n: int) -> int:
 # test case
 # get_word_score(1233, 7)
 # get_word_score("", 7)
-print(get_word_score("weed", 7))
-print(get_word_score("waybill", 7))
+# print(get_word_score("weed", 7))
+# print(get_word_score("waybill", 7))
 # get_word_score("blabla", 0)
 
 #
@@ -191,7 +191,11 @@ def update_hand(hand, word):
         subtract one from handcopy val
     return handcopy
     """
+    assert isinstance(hand, dict), "hand must be a dict"
+    assert isinstance(word, str), "word must be a string"
+    
     handcopy = hand.copy()
+    assert isinstance(handcopy, dict), "handcopy must be a dict"
     for letter in word:
         for n in handcopy:
             if letter == n:
