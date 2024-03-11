@@ -215,9 +215,28 @@ def is_valid_word(word, hand, word_list):
     hand: dictionary (string -> int)
     word_list: list of lowercase strings
     """
-    # TO DO ... <-- Remove this comment when you code this function
-
-
+    #pre condition
+    """for each letter in word
+        if letter in hand
+            find the count of letter in word
+            and make sure that count is in hand
+    """
+    word : str
+        
+    for letter in word:
+        count = word.count(letter)
+        if letter not in hand:
+            return False
+        elif word not in word_list:
+            return False
+        else:
+            if hand[letter] - count < 0:
+                return False
+    return True
+                
+    
+    #post condition
+    #does not mutate the hand
 #
 # Problem #4: Playing a hand
 #
