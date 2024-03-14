@@ -114,7 +114,7 @@ def get_word_score(word: str, n: int) -> int:
 #
 # Problem #2: Make sure you understand how this function works and what it does!
 #
-def display_hand(hand: dict):
+def display_hand(hand):
     """
      Displays the letters currently in the hand.
 
@@ -126,11 +126,13 @@ def display_hand(hand: dict):
 
     hand: dictionary (string -> int)
     """
+    assert isinstance(hand, dict), "hand must be a list"
     for letter in hand.keys():
         for j in range(hand[letter]):
             print(letter, end=" ")       # print all on the same line
     print()                             # print an empty line
 
+display_hand({'a': 1, 'q': 1, 'l': 2, 'm': 1, 'u': 1, 'i': 1})
 #
 # Problem #2: Make sure you understand how this function works and what it does!
 #
@@ -148,6 +150,8 @@ def deal_hand(n):
     n: int >= 0
     returns: dictionary (string -> int)
     """
+    assert isinstance(n, int), "n is a integer"
+    
     hand = {}
     num_vowels = n // 3
 
@@ -183,7 +187,7 @@ def update_hand(hand, word):
     hand: dictionary (string -> int)    
     returns: dictionary (string -> int)
     """
-    # todo
+    
     """
     make a hand.copy()
     for every letter in word
@@ -208,7 +212,7 @@ print(update_hand(l, 'quail'))
 #
 # Problem #3: Test word validity
 #
-def is_valid_word(word, hand, word_list):
+def is_valid_word(word:str, hand:dict, word_list:list):
     """
     Returns True if word is in the word_list and is entirely
     composed of letters in the hand. Otherwise, returns False.
@@ -225,8 +229,7 @@ def is_valid_word(word, hand, word_list):
             find the count of letter in word
             and make sure that count is in hand
     """
-    word : str
-        
+       
     for letter in word:
         count = word.count(letter)
         if letter not in hand or word not in word_list:
@@ -250,14 +253,14 @@ def calculate_hand_len(hand):
     hand: dictionary (string-> int)
     returns: integer
     """
-    # TO DO... <-- Remove this comment when you code this function
+    
     assert isinstance(hand, dict), "hand must be a dictionary"
     count = 0
     for letter in hand:
         count += hand[letter]
     return count
 
-def play_hand(hand:dict, word_list: list, n: int):
+def play_hand(hand, word_list, n):
     """
     Allows the user to play the given hand, as follows:
 
@@ -279,7 +282,9 @@ def play_hand(hand:dict, word_list: list, n: int):
       n: integer (HAND_SIZE; i.e., hand size required for additional points)
 
     """
-    # BEGIN PSEUDOCODE <-- Remove this comment when you code this function; do your coding within the pseudocode (leaving those comments in-place!)
+    """
+    a
+    """
     # Keep track of the total score
 
     # As long as there are still letters left in the hand:
@@ -306,7 +311,23 @@ def play_hand(hand:dict, word_list: list, n: int):
 
     # Game is over (user entered a '.' or ran out of letters), so tell user the total score
 
-
+    score = 0
+    while calculate_hand_len(hand) > 0:
+        player_input = input("please input a word: ")
+        print(display_hand(hand))
+        if player_input == ".":
+            break
+        else:
+            if is_valid_word(player_input, hand, word_list) == False:
+                player_input = 0
+                print("word invalid, please input a correct word")
+                print("")
+            else:
+                score += get_word_score(player_input, n)
+                print(f"you earn {get_word_score(player_input, n)} points!")
+        update_hand(hand, player_input)
+    print(f"you earn a total of {score} points!")
+    
 #
 # Problem #5: Playing a game
 #
