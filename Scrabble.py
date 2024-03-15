@@ -71,7 +71,7 @@ def get_word_score(word: str, n: int) -> int:
     n: integer (HAND_SIZE; i.e., hand size required for additional points)
     returns: int >= 0
     """
-    # TO DO ... <-- Remove this comment when you code this function
+    
     # pre-condition
     assert isinstance(word, str), "word must be a string"
     if len(word) > 0:
@@ -126,7 +126,7 @@ def display_hand(hand):
 
     hand: dictionary (string -> int)
     """
-    assert isinstance(hand, dict), "hand must be a list"
+    assert isinstance(hand, dict), "hand must be a dict"
     for letter in hand.keys():
         for j in range(hand[letter]):
             print(letter, end=" ")       # print all on the same line
@@ -201,12 +201,20 @@ def update_hand(hand, word):
     handcopy = hand.copy()
     assert isinstance(handcopy, dict), "handcopy must be a dict"
     for letter in word:
-        for n in handcopy:
-            if letter == n:
-                handcopy[n] -= 1
+        
+        print(handcopy[letter])
+        if handcopy[letter] > 0: 
+            handcopy[letter] -= 1
+        else:
+            del(handcopy[letter])
+        
+    print([val >= 0 for val in handcopy.values()])
+    assert all([val >= 0 for val in handcopy.values()]) , "the letter cannot be negative"
+    
+    print(f'{handcopy=}')
     return handcopy
                 
-l = {'a': 1, 'q': 1, 'l': 2, 'm': 1, 'u': 1, 'i': 1}
+l = {'a': 0, 'q': 1, 'l': 2, 'm': 1, 'u': 1, 'i': 1}
 print(update_hand(l, 'quail'))
 
 #
@@ -239,7 +247,7 @@ def is_valid_word(word:str, hand:dict, word_list:list):
                 return False
     return True
                 
-    
+    assert isinstance(count, int)
     #post condition
     #does not mutate the hand
 #
@@ -344,8 +352,13 @@ def play_game(word_list):
 
     2) When done playing the hand, repeat from step 1    
     """
-    # TO DO ... <-- Remove this comment when you code this function
-    # <-- Remove this line when you code the function
+    
+    user_input = input("please enter 'n', 'r' or 'e'")
+    if user_input == 'n':
+        deal_hand(7)
+    if user_input == 'r':
+        g
+    
     print("play_game not yet implemented.")
 
 
