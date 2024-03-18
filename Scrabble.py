@@ -237,19 +237,24 @@ def is_valid_word(word:str, hand:dict, word_list:list):
             find the count of letter in word
             and make sure that count is in hand
     """
+    assert isinstance(word, str), "word is a string"
+    assert isinstance(word_list, list), "word is a list"
+    assert isinstance(hand, dict), "hand is a dictionary"
        
+    hand_copy = hand.copy()
     for letter in word:
         count = word.count(letter)
-        if letter not in hand or word not in word_list:
+        if letter not in hand_copy:
             return False
-        else:
-            if hand[letter] - count < 0:
-                return False
+        elif hand_copy[letter] - count < 0:
+            return False
+    
+    if word not in word_list:
+        return False
+    assert isinstance(letter, str), "letter is a string"  
+    assert isinstance(hand_copy[letter], int), "this is a int"
     return True
-                
-    assert isinstance(count, int)
-    #post condition
-    #does not mutate the hand
+
 #
 # Problem #4: Playing a hand
 #
