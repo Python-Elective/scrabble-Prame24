@@ -325,19 +325,19 @@ def play_hand(hand, word_list, n):
     # Game is over (user entered a '.' or ran out of letters), so tell user the total score
 
     score = 0
+    deal_hand(n)
+    print(display_hand(hand))
     while calculate_hand_len(hand) > 0:
         player_input = input("please input a word: ")
         print(display_hand(hand))
         if player_input == ".":
             break
+        elif is_valid_word(player_input, hand, word_list) == False:
+            print("word invalid, please input a correct word")
+            print("")
         else:
-            if is_valid_word(player_input, hand, word_list) == False:
-                player_input = 0
-                print("word invalid, please input a correct word")
-                print("")
-            else:
-                score += get_word_score(player_input, n)
-                print(f"you earn {get_word_score(player_input, n)} points!")
+            score += get_word_score(player_input, n)
+            print(f"you earn {get_word_score(player_input, n)} points!")
         update_hand(hand, player_input)
     print(f"you earn a total of {score} points!")
     
@@ -358,11 +358,8 @@ def play_game(word_list):
     2) When done playing the hand, repeat from step 1    
     """
     
-    user_input = input("please enter 'n', 'r' or 'e'")
-    if user_input == 'n':
-        deal_hand(7)
-    if user_input == 'r':
-        g
+    while True:
+        
     
     print("play_game not yet implemented.")
 
