@@ -132,7 +132,7 @@ def display_hand(hand):
             print(letter, end=" ")       # print all on the same line
     print()                             # print an empty line
 
-display_hand({'a': 1, 'q': 1, 'l': 2, 'm': 1, 'u': 1, 'i': 1})
+# display_hand({'a': 1, 'q': 1, 'l': 2, 'm': 1, 'u': 1, 'i': 1})
 #
 # Problem #2: Make sure you understand how this function works and what it does!
 #
@@ -200,8 +200,8 @@ def update_hand(hand, word):
     
     handcopy = hand.copy()
     assert isinstance(handcopy, dict), "handcopy must be a dict"
+    
     for letter in word:
-        
         print(handcopy[letter])
         if handcopy[letter] > 0: 
             handcopy[letter] -= 1
@@ -211,11 +211,11 @@ def update_hand(hand, word):
     print([val >= 0 for val in handcopy.values()])
     assert all([val >= 0 for val in handcopy.values()]) , "the letter cannot be negative"
     
-    print(f'{handcopy=}')
+    print(f'{handcopy=} ')
     return handcopy
                 
-l = {'a': 0, 'q': 1, 'l': 2, 'm': 1, 'u': 1, 'i': 1}
-print(update_hand(l, 'quail'))
+# l = {'a': 0, 'q': 1, 'l': 2, 'm': 1, 'u': 1, 'i': 1}
+# print(update_hand(l, 'quail'))
 
 #
 # Problem #3: Test word validity
@@ -326,7 +326,8 @@ def play_hand(hand, word_list, n):
 
     score = 0
     deal_hand(n)
-    print(display_hand(hand))
+    print(f"current hand: {display_hand(hand)}")
+    
     while calculate_hand_len(hand) > 0:
         player_input = input("please input a word: ")
         print(display_hand(hand))
@@ -357,11 +358,20 @@ def play_game(word_list):
 
     2) When done playing the hand, repeat from step 1    
     """
+    hand = {}
+    old_hand = hand
     
     while True:
-        
-    
-    print("play_game not yet implemented.")
+        player_input = input("Please enter 'n' 'r' or 'e': ")
+        if player_input == 'n':
+            hand = deal_hand(7)
+            play_hand(hand, word_list, 7)
+        elif player_input == 'r':
+            play_hand(old_hand, word_list, 7)
+        elif player_input == 'e':
+            break
+        else:
+            print("incorrect input")
 
 
 #
