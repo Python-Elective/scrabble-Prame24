@@ -130,7 +130,7 @@ def display_hand(hand):
     for letter in hand.keys():
         for j in range(hand[letter]):
             print(letter, end=" ")       # print all on the same line
-    print()                             # print an empty line
+    print(" ")                           # print an empty line
 
 # display_hand({'a': 1, 'q': 1, 'l': 2, 'm': 1, 'u': 1, 'i': 1})
 #
@@ -202,16 +202,16 @@ def update_hand(hand, word):
     assert isinstance(handcopy, dict), "handcopy must be a dict"
     
     for letter in word:
-        print(handcopy[letter])
+        # print(handcopy[letter])
         if handcopy[letter] > 0: 
             handcopy[letter] -= 1
         else:
             del(handcopy[letter])
         
-    print([val >= 0 for val in handcopy.values()])
+    # print([val >= 0 for val in handcopy.values()])
     assert all([val >= 0 for val in handcopy.values()]) , "the letter cannot be negative"
     
-    print(f'{handcopy=} ')
+    print(f'hand = {handcopy}')
     return handcopy
                 
 # l = {'a': 0, 'q': 1, 'l': 2, 'm': 1, 'u': 1, 'i': 1}
@@ -359,9 +359,10 @@ def play_game(word_list):
     2) When done playing the hand, repeat from step 1    
     """
     hand = {}
-    old_hand = hand
+    
     
     while True:
+        old_hand = hand
         player_input = input("Please enter 'n' 'r' or 'e': ")
         if player_input == 'n':
             hand = deal_hand(7)
@@ -372,6 +373,7 @@ def play_game(word_list):
             break
         else:
             print("incorrect input")
+    print("Game finished!")
 
 
 #
