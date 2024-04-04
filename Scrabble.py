@@ -130,7 +130,7 @@ def display_hand(hand):
     for letter in hand.keys():
         for j in range(hand[letter]):
             print(letter, end=" ")       # print all on the same line
-    print(" ")                           # print an empty line
+    print("")                           # print an empty line
 
 # display_hand({'a': 1, 'q': 1, 'l': 2, 'm': 1, 'u': 1, 'i': 1})
 #
@@ -211,7 +211,6 @@ def update_hand(hand, word):
     # print([val >= 0 for val in handcopy.values()])
     assert all([val >= 0 for val in handcopy.values()]) , "the letter cannot be negative"
     
-    print(f'hand = {handcopy}')
     return handcopy
                 
 # l = {'a': 0, 'q': 1, 'l': 2, 'm': 1, 'u': 1, 'i': 1}
@@ -326,11 +325,15 @@ def play_hand(hand, word_list, n):
 
     score = 0
     deal_hand(n)
-    print(f"current hand: {display_hand(hand)}")
+    print("current hand:", end="")
+    display_hand(hand)
+    assert isinstance(n, int), "n is an integer"
+    assert isinstance(hand, dict), "hand is a dict"
+    assert isinstance(word_list, list), "word_list is a list"
     
     while calculate_hand_len(hand) > 0:
         player_input = input("please input a word: ")
-        print(display_hand(hand))
+        display_hand(hand)
         if player_input == ".":
             break
         elif is_valid_word(player_input, hand, word_list) == False:
@@ -365,10 +368,13 @@ def play_game(word_list):
         old_hand = hand
         player_input = input("Please enter 'n' 'r' or 'e': ")
         if player_input == 'n':
-            hand = deal_hand(7)
-            play_hand(hand, word_list, 7)
+            hand = deal_hand(HAND_SIZE)
+            play_hand(hand, word_list, HAND_SIZE)
         elif player_input == 'r':
-            play_hand(old_hand, word_list, 7)
+            if old_hand == {}:
+                print("invalid!, you have not play a hand yet")
+            else:
+                play_hand(old_hand, word_list, HAND_SIZE)
         elif player_input == 'e':
             break
         else:
